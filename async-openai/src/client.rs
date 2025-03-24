@@ -377,7 +377,7 @@ impl<C: Config> Client<C> {
         Fut: core::future::Future<Output = Result<reqwest::Request, OpenAIError>>,
     {
         let bytes = self.execute_raw(request_maker).await?;
-        println!("raw response {}", String::from_utf8(bytes.clone()))
+        println!("raw response {}", String::from_utf8(bytes.clone()));
 
         let response: O = serde_json::from_slice(bytes.as_ref())
             .map_err(|e| map_deserialization_error(e, bytes.as_ref()))?;
